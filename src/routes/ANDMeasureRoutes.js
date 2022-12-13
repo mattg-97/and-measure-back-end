@@ -1,4 +1,4 @@
-import { GetClubContribution, GetIndividualContribution } from '../controllers/ContributionController';
+import { GetClubContribution, GetGlobalProgress, GetIndividualContribution } from '../controllers/ContributionController';
 import { AddProject, GetProjects } from '../controllers/ProjectsController';
 import { AddUser, DeleteUser, GetAllUsers } from '../controllers/UsersController';
 
@@ -17,6 +17,9 @@ const routes = (app) => {
 
   app.route('/DeleteUser')
     .delete(DeleteUser);
+
+  app.route('/GetGlobalProgress')
+    .get(GetGlobalProgress);
 
   app.route('/GetIndividualContribution')
     .get(GetIndividualContribution);

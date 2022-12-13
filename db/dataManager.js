@@ -56,3 +56,20 @@ export const UpdateContributors = async (projectName, contributors) => {
     await pool.query('INSERT INTO andi_contribution_log (project_id, user_id) VALUES ($1, $2);', [projectId, contributor]);
   }
 };
+
+export const GetClubIDFromName = async (clubName) => {
+  console.log(clubName);
+  const clubId = await pool.query('SELECT club_id FROM clubs WHERE club_name = $1;', [clubName]);
+  return Number(clubId.rows[0].club_id);
+};
+
+export const HandleClubContributionRequest = async (clubId) => {
+  let clubContribution;
+  if (typeof clubId === 'string') {
+    const fetchedClubId = await GetClubIDFromName(clubId);
+    clubContribution = await pool.query('Select DISTINCT project_name, total_users, club_name, club_id from projects p inner join(Select * from andi_contribution_log a inner join (Select c.club_id, club_name, user_id from clubs c inner join (Select * from users where club_id = $1) u on c.club_id = u.club_id) b on a.user_id = b.user_id) c on p.project_id = c.project_id;', [fetchedClubId]);
+  } else {
+    clubContribution = await pool.query('Select DISTINCT project_name, total_users, club_name, club_id from projects p inner join(Select * from andi_contribution_log a inner join (Select c.club_id, club_name, user_id from clubs c inner join (Select * from users where club_id = $1) u on c.club_id = u.club_id) b on a.user_id = b.user_id) c on p.project_id = c.project_id;', [clubId]);
+  }
+  return clubContribution;
+};

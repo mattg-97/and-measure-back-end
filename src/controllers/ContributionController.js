@@ -1,4 +1,4 @@
-import { CreateClubResponseObject, CreateIndiviudalResponseObject } from '../../db/dataManager';
+import { CreateClubResponseObject, CreateIndiviudalResponseObject, HandleClubContributionRequest } from '../../db/dataManager';
 
 const pool = require('../../db/db');
 
@@ -15,8 +15,21 @@ export const GetIndividualContribution = async (req, res) => {
 export const GetClubContribution = async (req, res) => {
   try {
     const { club_id: clubId } = req.body;
-    const clubContribution = await pool.query('Select DISTINCT project_name, total_users, club_name, club_id from projects p inner join(Select * from andi_contribution_log a inner join (Select c.club_id, club_name, user_id from clubs c inner join (Select * from users where club_id = $1) u on c.club_id = u.club_id) b on a.user_id = b.user_id) c on p.project_id = c.project_id;', [clubId]);
+    const clubContribution = await HandleClubContributionRequest(clubId);
     res.json(await CreateClubResponseObject(clubContribution));
+  } catch (error) {
+    res.send(error);
+  }
+};
+
+export const GetGlobalProgress = async (req, res) => {
+  try {
+    const globalContribution = await pool.query('SELECT SUM(total_users) FROM projects;');
+    const responseObject = {
+      goal: 200000000,
+      current_contribution: Number(globalContribution.rows[0].sum)
+    };
+    res.json(responseObject);
   } catch (error) {
     res.send(error);
   }
