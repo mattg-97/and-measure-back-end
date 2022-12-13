@@ -1,25 +1,28 @@
-import { AddContribution } from "../controllers/LogController";
-import { AddProject, GetProjects } from "../controllers/ProjectsController";
-import { AddUser, DeleteUser, GetAllUsers } from "../controllers/UsersController";
+import { GetClubContribution, GetIndividualContribution } from '../controllers/ContributionController';
+import { AddProject, GetProjects } from '../controllers/ProjectsController';
+import { AddUser, DeleteUser, GetAllUsers } from '../controllers/UsersController';
 
 const routes = (app) => {
-    app.route("/AddUser")
+  app.route('/AddUser')
     .post(AddUser);
 
-    app.route("/GetUsers")
+  app.route('/GetUsers')
     .get(GetAllUsers);
 
-    app.route("/AddProject")
+  app.route('/AddProject')
     .post(AddProject);
 
-    app.route("/GetProjects")
+  app.route('/GetProjects')
     .get(GetProjects);
 
-    app.route("/DeleteUser")
+  app.route('/DeleteUser')
     .delete(DeleteUser);
 
-    app.route("/AddContribution")
-    .post(AddContribution);
+  app.route('/GetIndividualContribution')
+    .get(GetIndividualContribution);
+
+  app.route('/GetClubContribution')
+    .get(GetClubContribution);
 };
 
 export default routes;
