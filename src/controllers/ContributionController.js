@@ -22,6 +22,15 @@ export const GetClubContribution = async (req, res) => {
   }
 };
 
+export const GetANDContribution = async (req, res) => {
+  try {
+    const andContribution = await pool.query('');
+    res.json(andContribution);
+  } catch (error) {
+    res.send(error);
+  }
+};
+
 export const GetGlobalProgress = async (req, res) => {
   try {
     const globalContribution = await pool.query('SELECT SUM(total_users) FROM projects;');
