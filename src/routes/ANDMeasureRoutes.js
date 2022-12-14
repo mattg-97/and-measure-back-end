@@ -1,4 +1,4 @@
-import { GetClubContribution, GetGlobalProgress, GetIndividualContribution } from '../controllers/ContributionController';
+import { GetANDContribution, GetClubContribution, GetGlobalProgress, GetIndividualContribution } from '../controllers/ContributionController';
 import { AddProject, GetProjects } from '../controllers/ProjectsController';
 import { AddUser, DeleteUser, GetAllUsers } from '../controllers/UsersController';
 
@@ -23,6 +23,9 @@ const routes = (app) => {
 
   app.route('/GetIndividualContribution')
     .get(GetIndividualContribution);
+
+  app.route('/GetANDContribution')
+    .get(GetANDContribution);
 
   app.route('/GetClubContribution')
     .get(GetClubContribution);
