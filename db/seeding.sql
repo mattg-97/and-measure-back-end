@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS users(
     user_id SERIAL PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
+    full_name VARCHAR(100) NOT NULL,
     and_title VARCHAR(100) NOT NULL,
     club_id INT REFERENCES clubs(club_id)
 );
@@ -32,11 +33,11 @@ INSERT INTO clubs (club_name) VALUES ('Babbage');
 INSERT INTO clubs (club_name) VALUES ('Wangari');
 INSERT INTO clubs (club_name) VALUES ('Jemison');
 
-INSERT INTO users (first_name, last_name, and_title, club_id) VALUES ('Matthew', 'Gill', 'AND Aspiring Polymath', 1);
-INSERT INTO users (first_name, last_name, and_title, club_id) VALUES ('Jack', 'McKelvey', 'AND Indie Rocker', 3);
-INSERT INTO users (first_name, last_name, and_title, club_id) VALUES ('Will', 'Cowen', 'AND Marine Explorer', 2);
-INSERT INTO users (first_name, last_name, and_title, club_id) VALUES ('Bradley', 'Gallagher', 'AND Space Orbiter', 1);
-INSERT INTO users (first_name, last_name, and_title, club_id) VALUES ('Victoria', 'Igwemma', 'AND Knowledge Seeker', 3);
+INSERT INTO users (first_name, last_name, full_name, and_title, club_id) VALUES ('Matthew', 'Gill', 'Matthew Gill', 'AND Aspiring Polymath', 1);
+INSERT INTO users (first_name, last_name, full_name, and_title, club_id) VALUES ('Jack', 'McKelvey', 'Jack McKelvey', 'AND Indie Rocker', 3);
+INSERT INTO users (first_name, last_name, full_name, and_title, club_id) VALUES ('Will', 'Cowen', 'Will Cowen', 'AND Marine Explorer', 2);
+INSERT INTO users (first_name, last_name, full_name, and_title, club_id) VALUES ('Bradley', 'Gallagher', 'Bradley Gallagher', 'AND Space Orbiter', 1);
+INSERT INTO users (first_name, last_name, full_name, and_title, club_id) VALUES ('Victoria', 'Igwemma', 'Victoria Igwemma', 'AND Knowledge Seeker', 3);
 
 INSERT INTO projects (project_name, total_users) VALUES ('Very', 900000);
 INSERT INTO projects (project_name, total_users) VALUES ('British Airways', 1900000);
