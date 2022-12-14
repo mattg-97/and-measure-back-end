@@ -9,8 +9,10 @@ export const CreateANDContributionObject = async (andContribution) => {
   }
   const responseObject = {
     graphTitle: 'AND Total BHAG Contributions',
-    labels,
-    values
+    dataSet: {
+      labels,
+      values
+    }
   };
   return responseObject;
 };
@@ -89,6 +91,6 @@ export const GetProjectIDByName = async (projectName) => {
 export const UpdateContributors = async (projectName, contributors) => {
   const projectId = await GetProjectIDByName(projectName);
   for (const contributor of contributors) {
-    await pool.query('INSERT INTO andi_contribution_log (project_id, user_id) VALUES ($1, $2);', [projectId, contributor]);
+    await pool.query('INSERT INTO andi_contribution_log (project_id, user_id) VALUES ($1, $2);', [projectId, contributor.id]);
   }
 };
