@@ -13,7 +13,7 @@ export const AddUser = async (req, res) => {
 
 export const GetAllUsers = async (req, res) => {
   try {
-    const newUser = await pool.query('select * from users;');
+    const newUser = await pool.query('select first_name, last_name, user_id from users;');
     res.json(newUser);
   } catch (error) {
     res.send(error);
