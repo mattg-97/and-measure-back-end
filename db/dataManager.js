@@ -40,6 +40,7 @@ export const CreateIndiviudalResponseObject = async (contributionObject) => {
   const firstName = contributionObject.rows[0].first_name;
   const lastName = contributionObject.rows[0].last_name;
   const andTitle = contributionObject.rows[0].and_title;
+  const clubId = contributionObject.rows[0].club_id;
   const projectNames = [];
   const projectValues = [];
   for (const contribution of contributionObject.rows) {
@@ -49,6 +50,7 @@ export const CreateIndiviudalResponseObject = async (contributionObject) => {
   const responseObject = {
     name: `${firstName} ${lastName}`,
     andTitle,
+    clubId,
     graphTitle: `${firstName} ${lastName}'s BHAG Contributions`,
     dataSet: {
       labels: projectNames,

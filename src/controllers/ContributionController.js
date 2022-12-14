@@ -37,7 +37,7 @@ export const GetGlobalProgress = async (req, res) => {
 export const GetIndividualContribution = async (req, res) => {
   try {
     const userId = Number(req.query.userId);
-    const indiviudualContribution = await pool.query('select first_name, last_name, and_title, project_id, project_name, total_users from users inner join (select projects.project_id, project_name, total_users, user_id from projects inner join (select * from andi_contribution_log where user_id = $1) as contributions ON projects.project_id = contributions.project_id) as t1 on users.user_id = t1.user_id;', [userId]);
+    const indiviudualContribution = await pool.query('select first_name, last_name, and_title, club_id, project_id, project_name, total_users from users inner join (select projects.project_id, project_name, total_users, user_id from projects inner join (select * from andi_contribution_log where user_id = $1) as contributions ON projects.project_id = contributions.project_id) as t1 on users.user_id = t1.user_id;', [userId]);
     res.json(await CreateIndiviudalResponseObject(indiviudualContribution));
   } catch (error) {
     res.send(error);
