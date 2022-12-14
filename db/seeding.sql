@@ -38,11 +38,11 @@ INSERT INTO users (first_name, last_name, and_title, club_id) VALUES ('Will', 'C
 INSERT INTO users (first_name, last_name, and_title, club_id) VALUES ('Bradley', 'Gallagher', 'AND Space Orbiter', 1);
 INSERT INTO users (first_name, last_name, and_title, club_id) VALUES ('Victoria', 'Igwemma', 'AND Knowledge Seeker', 3);
 
-INSERT INTO projects (project_name, total_users) VALUES ('Very', 18000);
-INSERT INTO projects (project_name, total_users) VALUES ('British Airways', 190000);
-INSERT INTO projects (project_name, total_users) VALUES ('Lloyds Bank', 16700);
-INSERT INTO projects (project_name, total_users) VALUES ('Vodafone', 32400);
-INSERT INTO projects (project_name, total_users) VALUES ('Costa Coffee', 1460);
+INSERT INTO projects (project_name, total_users) VALUES ('Very', 900000);
+INSERT INTO projects (project_name, total_users) VALUES ('British Airways', 1900000);
+INSERT INTO projects (project_name, total_users) VALUES ('Lloyds Bank', 1670000);
+INSERT INTO projects (project_name, total_users) VALUES ('Vodafone', 32400000);
+INSERT INTO projects (project_name, total_users) VALUES ('Costa Coffee', 1460000);
 
 INSERT INTO andi_contribution_log (project_id, user_id) VALUES (1, 1);
 INSERT INTO andi_contribution_log (project_id, user_id) VALUES (3, 1);
