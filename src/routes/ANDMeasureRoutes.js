@@ -6,7 +6,7 @@ const routes = (app) => {
   app.route('/AddUser')
     .post(AddUser);
 
-  app.route('/GetUsers')
+  app.route('/GetAllUsers')
     .get(GetAllUsers);
 
   app.route('/AddProject')
