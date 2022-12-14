@@ -1,5 +1,5 @@
 import { GetANDContribution, GetClubContribution, GetGlobalProgress, GetIndividualContribution } from '../controllers/ContributionController';
-import { AddProject, GetProjects } from '../controllers/ProjectsController';
+import { AddProject } from '../controllers/ProjectsController';
 import { AddUser, DeleteUser, GetAllUsers } from '../controllers/UsersController';
 
 const routes = (app) => {
@@ -11,9 +11,6 @@ const routes = (app) => {
 
   app.route('/AddProject')
     .post(AddProject);
-
-  app.route('/GetProjects')
-    .get(GetProjects);
 
   app.route('/DeleteUser')
     .delete(DeleteUser);

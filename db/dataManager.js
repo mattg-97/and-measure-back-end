@@ -1,5 +1,20 @@
 import pool from './db';
 
+export const CreateANDContributionObject = async (andContribution) => {
+  const labels = [];
+  const values = [];
+  for (const contribution of andContribution) {
+    labels.push(contribution.clubname);
+    values.push(contribution.totalusers);
+  }
+  const responseObject = {
+    graphTitle: 'AND Total BHAG Contributions',
+    labels,
+    values
+  };
+  return responseObject;
+};
+
 export const CreateClubResponseObject = async (contributionObject) => {
   const clubName = contributionObject.rows[0].club_name;
   const clubId = Number(contributionObject.rows[0].club_id);
@@ -10,8 +25,9 @@ export const CreateClubResponseObject = async (contributionObject) => {
     projectValues.push(Number(contribution.total_users));
   }
   const responseObject = {
-    club_name: clubName,
-    club_id: clubId,
+    clubName,
+    clubId,
+    graphTitle: `Club ${clubName} BHAG Contributions`,
     dataSet: {
       labels: projectNames,
       values: projectValues
@@ -32,29 +48,14 @@ export const CreateIndiviudalResponseObject = async (contributionObject) => {
   }
   const responseObject = {
     name: `${firstName} ${lastName}`,
-    and_title: andTitle,
+    andTitle,
+    graphTitle: `${firstName} ${lastName}'s BHAG Contributions`,
     dataSet: {
       labels: projectNames,
       values: projectValues
     }
   };
   return responseObject;
-};
-
-export const CreateNewProject = async (projectName, totalUsers) => {
-  await pool.query('INSERT INTO projects (project_name, total_users) VALUES ($1, $2);', [projectName, totalUsers]);
-};
-
-export const GetProjectIDByName = async (projectName) => {
-  const getProjectIDByName = await pool.query('select project_id from projects where project_name = $1;', [projectName]);
-  return Number(getProjectIDByName.rows[0].project_id);
-};
-
-export const UpdateContributors = async (projectName, contributors) => {
-  const projectId = await GetProjectIDByName(projectName);
-  for (const contributor of contributors) {
-    await pool.query('INSERT INTO andi_contribution_log (project_id, user_id) VALUES ($1, $2);', [projectId, contributor]);
-  }
 };
 
 export const GetClubIDFromName = async (clubName) => {
@@ -72,4 +73,20 @@ export const HandleClubContributionRequest = async (clubId) => {
     clubContribution = await pool.query('Select DISTINCT project_name, total_users, club_name, club_id from projects p inner join(Select * from andi_contribution_log a inner join (Select c.club_id, club_name, user_id from clubs c inner join (Select * from users where club_id = $1) u on c.club_id = u.club_id) b on a.user_id = b.user_id) c on p.project_id = c.project_id;', [clubId]);
   }
   return clubContribution;
+};
+
+export const CreateNewProject = async (projectName, totalUsers) => {
+  await pool.query('INSERT INTO projects (project_name, total_users) VALUES ($1, $2);', [projectName, totalUsers]);
+};
+
+export const GetProjectIDByName = async (projectName) => {
+  const getProjectIDByName = await pool.query('select project_id from projects where project_name = $1;', [projectName]);
+  return Number(getProjectIDByName.rows[0].project_id);
+};
+
+export const UpdateContributors = async (projectName, contributors) => {
+  const projectId = await GetProjectIDByName(projectName);
+  for (const contributor of contributors) {
+    await pool.query('INSERT INTO andi_contribution_log (project_id, user_id) VALUES ($1, $2);', [projectId, contributor]);
+  }
 };
