@@ -22,7 +22,7 @@ export const GetAllUsers = async (req, res) => {
 
 export const GetAllUsersForDropdown = async (req, res) => {
   try {
-    const getUsers = await pool.query('select full_name, user_id from users limit 5;');
+    const getUsers = await pool.query('select full_name, user_id from users limit 8;');
     res.json(getUsers.rows);
   } catch (error) {
     res.send(error);
