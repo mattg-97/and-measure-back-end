@@ -4,7 +4,7 @@ export const AddProject = async (req, res) => {
   try {
     const { projectName, livesBetter: totalUsers, users: contributors } = req.body;
     if (projectName === 'Error') {
-      res.status(400).send('Error, project invalid');
+      res.send('Error, project invalid');
     } else {
       await CreateNewProject(projectName, Number(totalUsers));
       await UpdateContributors(projectName, contributors);

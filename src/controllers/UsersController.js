@@ -20,6 +20,15 @@ export const GetAllUsers = async (req, res) => {
   }
 };
 
+export const GetAllUsersForDropdown = async (req, res) => {
+  try {
+    const getUsers = await pool.query('select full_name, user_id from users limit 5;');
+    res.json(getUsers.rows);
+  } catch (error) {
+    res.send(error);
+  }
+};
+
 export const DeleteUser = async (req, res) => {
   try {
     await pool.query('DELETE FROM users WHERE user_id = $1;', [req.user_id]);

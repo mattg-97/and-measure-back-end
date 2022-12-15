@@ -1,6 +1,6 @@
 import { GetANDContribution, GetClubContribution, GetGlobalProgress, GetIndividualContribution } from '../controllers/ContributionController';
 import { AddProject } from '../controllers/ProjectsController';
-import { AddUser, DeleteUser, GetAllUsers } from '../controllers/UsersController';
+import { AddUser, DeleteUser, GetAllUsers, GetAllUsersForDropdown } from '../controllers/UsersController';
 
 const routes = (app) => {
   app.route('/AddUser')
@@ -8,6 +8,9 @@ const routes = (app) => {
 
   app.route('/GetAllUsers')
     .get(GetAllUsers);
+
+  app.route('/GetAllDropdownUsers')
+    .get(GetAllUsersForDropdown);
 
   app.route('/AddProject')
     .post(AddProject);
