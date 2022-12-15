@@ -5,7 +5,8 @@ const pool = require('../../db/db');
 export const GetANDContribution = async (req, res) => {
   try {
     const andContribution = await pool.query('Select club_name as clubName, sum(total_users) as totalUsers from (select * from projects p inner join(Select * from andi_contribution_log a inner join (Select c.club_id, club_name, user_id from clubs c inner join (Select * from users) u on c.club_id = u.club_id) b on a.user_id = b.user_id) c on p.project_id = c.project_id) as x GROUP BY club_name;');
-    res.json(await CreateANDContributionObject(andContribution.rows));
+    const andContributionObject = await CreateANDContributionObject(andContribution.rows);
+    res.json(andContributionObject);
   } catch (error) {
     res.send(error);
   }
